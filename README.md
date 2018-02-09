@@ -14,3 +14,25 @@
 # makefile support
 
 > k8 by example -- straight to the point, simple execution.
+
+# Incude .make as a library
+
+You can include this in a git repo as a submodule (preferred) or use an environment variable.
+
+## Add .make as a submodule
+
+```sh
+$ git submodule add https://github.com/mateothegreat/.make
+```
+
+### Use an enviroment variable
+
+```sh
+export MAKE_INCLUDE=/workspace/k8/cluster-2/.make
+```
+
+Now you can simply reference this path in any of your `Makfile`'s
+
+```Makefile
+include $(MAKE_INCLUDE)/Makefile.inc
+```

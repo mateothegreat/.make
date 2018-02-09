@@ -1,6 +1,8 @@
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-include $(SELF_DIR)/kubectl.mk
-include $(SELF_DIR)/listings.mk
-include $(SELF_DIR)/deployments.mk
-include $(SELF_DIR)/tls.mk
+include $(SELF_DIR)/includes/help.mk
+
+include $(SELF_DIR)/includes/kubectl.mk
+include $(SELF_DIR)/includes/listings.mk
+include $(SELF_DIR)/includes/deployments.mk
+include $(SELF_DIR)/includes/tls.mk
