@@ -16,3 +16,7 @@ get:		; @echo; for F in $(MANIFESTS); do echo "\n[ RETRIEVING $$F ]: \n" | tr 'a
 
 ## Describes manifests to kubernetes using kubectl describe (make manifests to see what will be installed)
 describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ DESCRIBING $$F ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS describe -f -; done; echo;
+
+
+## Find first pod and follow log output
+logs: ;	kubectl --namespace $(NS) logs -f $(kubectl get pods --all-namespaces -lapp=$(APP) -o jsonpath='{.items[0].metadata.name}'))
