@@ -20,3 +20,7 @@ describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ DESCRIBING $$F ]: \n" | t
 
 ## Find first pod and follow log output
 logs: ;	kubectl --namespace $(NS) logs -f $(shell kubectl get pods --all-namespaces -lapp=$(APP) -o jsonpath='{.items[0].metadata.name}')
+
+context:
+
+	kubectl config set-context $(kubectl config current-context) --namespace=$(NS)
