@@ -17,10 +17,11 @@ get:		; @echo; for F in $(MANIFESTS); do echo "\n[ RETRIEVING $$F ]: \n" | tr 'a
 ## Describes manifests to kubernetes using kubectl describe (make manifests to see what will be installed)
 describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ DESCRIBING $$F ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS describe -f -; done; echo;
 
-
 ## Find first pod and follow log output
 logs: ;	kubectl --namespace $(NS) logs -f $(shell kubectl get pods --all-namespaces -lapp=$(APP) -o jsonpath='{.items[0].metadata.name}')
 
-context:
+## Globally set the current-context (default namespace)
+context:    ; kubectl config set-context $(kubectl config current-context) --namespace=$(NS)
 
-	kubectl config set-context $(kubectl config current-context) --namespace=$(NS)
+## Grab a shell in a running container
+shell:      ; kubectl exec $(shell kubectl get pods --all-namespaces -lapp=$(APP) -o jsonpath='{.items[0].metadata.name}') -it -- /bin/sh
