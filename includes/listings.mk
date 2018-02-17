@@ -3,11 +3,12 @@ list: list_deployments list_pods list_services list_ingress
 
 
 get_resources:
+	@echo "${RESET}"
 
-	@echo $(YELLOW)
+	@echo "${PURPLE}"
 	@kubectl get pod -o wide --all-namespaces
 
-	@echo $(GREEN)
+	# @echo $(GREEN)
 	@kubectl get svc -o wide --all-namespaces
 
 	@echo $(WHITE)
