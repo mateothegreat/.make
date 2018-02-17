@@ -1,6 +1,6 @@
-MANIFESTS 	:= $(shell find manifests -type f | tr '\r\n' ' ')
+MANIFESTS 	:= $(shell find manifests -type f 2> /dev/null | tr '\r\n' ' ')
 
-.PHONY: manifests
+.PHONY: manifests kube logs
 
 ## Output manifests detected (used with make install, delete, get, describe, etc)
 manifests: ; @echo "MANIFESTS DETECTED: " $(MANIFESTS)
@@ -18,7 +18,7 @@ get:		; @echo; for F in $(MANIFESTS); do echo "\n[ RETRIEVING $$F ]: \n" | tr 'a
 describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ DESCRIBING $$F ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS describe -f -; done; echo;
 
 ## Find first pod and follow log output
-logs:       ; kubectl --namespace $(NS) logs -f $(shell kubectl get pods --all-namespaces -lapp=$(APP) -o jsonpath='{.items[0].metadata.name}')
+kube/logs:       ; kubectl --namespace $(NS) logs -f $(shell kubectl get pods --all-namespaces -lapp=$(APP) -o jsonpath='{.items[0].metadata.name}')
 
 ## Globally set the current-context (default namespace)
 context:    ; kubectl config set-context $(kubectl config current-context) --namespace=$(NS)
