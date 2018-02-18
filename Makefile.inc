@@ -8,3 +8,4 @@ include $(SELF_DIR)/includes/environment.mk
 include $(SELF_DIR)/includes/kubectl.mk
 include $(SELF_DIR)/includes/listings.mk
 include $(SELF_DIR)/includes/tls.mk
+include $(SELF_DIR)/includes/testing.mk
