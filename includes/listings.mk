@@ -1,13 +1,4 @@
 
-TIME		:= $(shell date +"%Y-%m-%d %H:%M:%S")
-PURPLE 		:= $(shell tput -Txterm setaf 129)
-GRAY  		:= $(shell tput setaf 245)
-GREEN  		:= $(shell tput -Txterm setaf 4)
-BLUE 		:= $(shell tput setaf 25)
-YELLOW 		:= $(shell tput setaf 3)
-WHITE  		:= $(shell tput setaf 7)
-RESET  		:= $(shell tput sgr0)
-
 list: list_deployments list_pods list_services list_ingress
 
 
