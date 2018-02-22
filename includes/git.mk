@@ -21,6 +21,10 @@ git/commit: git/backup	; @for F in $(MODULES); do echo "$(YELLOW)/$$F$(BLUE)" &&
 
 git/status: 			; git submodule status --recursive
 
+git/pull:
+
+	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F && git checkout master && git pull && git add . && git commit -am'bump' && git push; done
+
 git/fix-tracking: git/backup	;
 
 	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F && git config -f .gitmodules submodule..make.branch master && git branch -u origin/master master && git checkout master; done
