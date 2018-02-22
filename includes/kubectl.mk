@@ -1,18 +1,27 @@
 MANIFESTS 	:= $(shell find manifests -type f 2> /dev/null | tr '\r\n' ' ')
 
+TIME		:= $(shell date +"%Y-%m-%d %H:%M:%S")
+PURPLE 		:= $(shell tput setaf 129)
+GRAY  		:= $(shell tput setaf 245)
+GREEN  		:= $(shell tput setaf 34)
+BLUE 		:= $(shell tput setaf 25)
+YELLOW 		:= $(shell tput setaf 3)
+WHITE  		:= $(shell tput setaf 7)
+RESET  		:= $(shell tput sgr0)
+export
 .PHONY: manifests kube logs
 
 ## Installs manifests to kubernetes using kubectl apply (make manifests to see what will be installed)
-install:	; @echo; for F in $(MANIFESTS); do echo -n "[ INSTALLING $$F ]: " | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS apply -f -; done; echo;
+install:	; @echo; for F in $(MANIFESTS); do echo -n "[ $(BLUE)INSTALLING $$F$(RESET) ]: " | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS apply -f -; done; echo;
 
 ## Deletes manifests to kubernetes using kubectl delete (make manifests to see what will be installed)
-delete:		; @echo; for F in $(MANIFESTS); do echo -n "[ DELETING $$F ]: " | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS delete --ignore-not-found -f -; done; echo;
+delete:		; @echo; for F in $(MANIFESTS); do echo -n "[ $(GREEN)DELETING $$F$(RESET) ]: " | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS delete --ignore-not-found -f -; done; echo;
 
 ## Retrieves manifests to kubernetes using kubectl get (make manifests to see what will be installed)
-get:		; @echo; for F in $(MANIFESTS); do echo "\n[ RETRIEVING $$F ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS get -f -; done; echo;
+get:		; @echo; for F in $(MANIFESTS); do echo "\n[ $(GREEN)RETRIEVING $$F$(RESET) ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS get -f -; done; echo;
 
 ## Describes manifests to kubernetes using kubectl describe (make manifests to see what will be installed)
-describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ DESCRIBING $$F ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS describe -f -; done; echo;
+describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ $(GREEN)DESCRIBING $$F$(RESET) ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS describe -f -; done; echo;
 
 ## Globally set the current-context (default namespace)
 context:    ; kubectl config set-context $(kubectl config current-context) --namespace=$(NS)
