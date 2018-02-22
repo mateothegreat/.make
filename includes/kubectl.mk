@@ -26,3 +26,8 @@ dump/logs: 	; kubectl --namespace $(NS) logs -f $(shell kubectl get pods --all-n
 
 ## Output manifests detected (used with make install, delete, get, describe, etc)
 dump/manifests: ; @echo "MANIFESTS DETECTED: " $(MANIFESTS)
+
+### Create clusterrolebinding for cluster-admin
+rbac/grant:
+
+	kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud info | grep Account | cut -d '[' -f 2 | cut -d ']' -f 1)
