@@ -1,14 +1,6 @@
 MANIFESTS 	:= $(shell find manifests -type f 2> /dev/null | tr '\r\n' ' ')
-
-TIME		:= $(shell date +"%Y-%m-%d %H:%M:%S")
-PURPLE 		:= $(shell tput setaf 129)
-GRAY  		:= $(shell tput setaf 245)
-GREEN  		:= $(shell tput setaf 34)
-BLUE 		:= $(shell tput setaf 25)
-YELLOW 		:= $(shell tput setaf 3)
-WHITE  		:= $(shell tput setaf 7)
-RESET  		:= $(shell tput sgr0)
 export
+
 .PHONY: manifests kube logs
 
 ## Installs manifests to kubernetes using kubectl apply (make manifests to see what will be installed)

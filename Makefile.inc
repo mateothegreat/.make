@@ -1,4 +1,6 @@
-SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+TIME		:= $(shell date +"%Y-%m-%d_%H%M%S")
+SELF_DIR    := $(dir $(lastword $(MAKEFILE_LIST)))
+export
 
 include $(SELF_DIR)/includes/colors.mk
 include $(SELF_DIR)/includes/help.mk

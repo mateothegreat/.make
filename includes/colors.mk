@@ -1,5 +1,3 @@
-
-TIME		:= $(shell date +"%Y-%m-%d %H:%M:%S")
 PURPLE 		:= $(shell tput setaf 129)
 GRAY  		:= $(shell tput setaf 245)
 GREEN  		:= $(shell tput setaf 34)

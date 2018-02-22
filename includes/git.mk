@@ -1,10 +1,9 @@
-
-## Update submodule(s) to HEAD from origin
+### Update submodule(s) to HEAD from origin
 git/update:
 
 	git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
 
-### Pull submodules to latest commits instead of what repos point to
+#### Pull submodules to latest commits instead of what repos point to
 git/latest:
 
 	git submodule update --init --recursive
@@ -18,14 +17,14 @@ git/init-submodule-%:	; @echo $*; if [ -d modules/$*/.make ]; then cd modules/$*
 
 git/backup: 			; @echo $(TIME); tar -czf ../.backup/modules.$(TIME).tar .
 git/clean: 	git/backup	; rm -rf modules/.make; rm -rf modules/*
-git/commit: git/backup	; @for F in $(MODULES); do echo "$(YELLOW)/modules/$$F$(BLUE)" && cd $(PWD)/modules/$$F && git add . && git commit -am'$$MESSAGE' && git push origin HEAD:master; done
+git/commit: git/backup	; @for F in $(MODULES); do echo "$(YELLOW)/$$F$(BLUE)" && cd $(PWD)/modules/$$F && git add . && git commit -am'$$MESSAGE' && git push origin HEAD:master; done
 
 git/status: 			; git submodule status --recursive
 
 git/fix-tracking: git/backup	;
 
-	@for F in $(MODULES); do echo "$(YELLOW)/modules/$$F$(BLUE)" && cd $(PWD)/modules/$$F && git config -f .gitmodules submodule..make.branch master && git branch -u origin/master master && git checkout master; done
+	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F && git config -f .gitmodules submodule..make.branch master && git branch -u origin/master master && git checkout master; done
 
 git/.make-up: git/backup
 
-	@for F in $(MODULES); do echo "$(YELLOW)/modules/$$F$(BLUE)" && cd $(PWD)/modules/$$F/.make && git checkout master && cd .. && git add . && git commit -am'bump' && git push; done
+	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F/.make && git checkout master && cd .. && git add . && git commit -am'bump' && git push; done
