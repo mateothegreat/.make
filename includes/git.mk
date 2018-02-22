@@ -27,4 +27,4 @@ git/fix-tracking: git/backup	;
 
 git/.make-up: git/backup
 
-	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F/.make && git checkout master && cd .. && git add . && git commit -am'bump' && git push; done
+	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F/.make && git checkout master && git pull && cd .. && git add . && git commit -am'bump' && git push; done
