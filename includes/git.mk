@@ -29,6 +29,7 @@ git/fix-tracking: git/backup	;
 
 	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F && git config -f .gitmodules submodule..make.branch master && git branch -u origin/master master && git checkout master; done
 
+### Update all .make submodules
 git/.make-up: git/backup
 
 	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F/.make && git checkout master && git pull && cd .. && git add . && git commit -am'bump' && git push; done
