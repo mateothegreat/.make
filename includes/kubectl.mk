@@ -12,6 +12,21 @@ delete:		; @echo; for F in $(MANIFESTS); do echo -n "[ $(GREEN)DELETING $$F$(RES
 ## Retrieves manifests to kubernetes using kubectl get (make manifests to see what will be installed)
 get:		; @echo; for F in $(MANIFESTS); do echo "\n[ $(GREEN)RETRIEVING $$F$(RESET) ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS get -f -; done; echo;
 
+## Retrives all resources (in color!)
+get/all:
+
+	@echo "$(GREEN)"
+	@kubectl get pod -o wide --all-namespaces
+
+	@echo "$(YELLOW)"
+	@kubectl get svc -o wide --all-namespaces
+
+	@echo "$(WHITE)"
+	@kubectl get ing,pvc -o wide --all-namespaces
+
+	@echo "$(NORMAL)"
+	@kubectl get deployment,rs,rc  --all-namespaces
+
 ## Describes manifests to kubernetes using kubectl describe (make manifests to see what will be installed)
 describe:	; @echo; for F in $(MANIFESTS); do echo "\n[ $(GREEN)DESCRIBING $$F$(RESET) ]: \n" | tr 'a-z' 'A-Z' ; envsubst < $$F | kubectl -n $$NS describe -f -; done; echo;
 

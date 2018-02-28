@@ -46,3 +46,6 @@ guard-%:
 		echo "Environment variable $* not set (make $*=.. target or export $*=.."; \
 		exit 1; \
 	fi
+
+### Get your external ip
+get/myip: ; curl 'https://api.ipify.org'; echo 
