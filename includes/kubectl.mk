@@ -28,6 +28,6 @@ dump/logs: 	; kubectl --namespace $(NS) logs -f $(shell kubectl get pods --all-n
 dump/manifests: ; @echo "MANIFESTS DETECTED: " $(MANIFESTS)
 
 ### Create clusterrolebinding for cluster-admin
-rbac/grant:
+rbac/grant-google:
 
 	kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud info | grep Account | cut -d '[' -f 2 | cut -d ']' -f 1)
