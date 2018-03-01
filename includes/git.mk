@@ -35,6 +35,6 @@ git/up: git/backup
 	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F/.make && git fetch origin && git checkout master && git reset --hard origin/master && cd .. && git add . && git commit -am'bump' && git push; done
 
 ### Update all .make submodules
-git/.make-up: git/backup
+git/.make-up: guard-MESSAGE git/backup
 
 	@for F in $(MODULES); do echo "$(YELLOW)$$F$(BLUE)" && cd $(PWD)/$$F/.make && git fetch origin && git checkout master && git reset --hard origin/master && cd .. && git add . && git commit -am'$(MESSAGE)' && git push; done
