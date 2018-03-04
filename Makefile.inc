@@ -7,5 +7,6 @@ include $(SELF_DIR)/includes/help.mk
 
 include $(SELF_DIR)/includes/git.mk
 
+include $(SELF_DIR)/includes/docker.mk
 include $(SELF_DIR)/includes/kubectl.mk
 include $(SELF_DIR)/includes/tls.mk
