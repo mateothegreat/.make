@@ -27,7 +27,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""|
 # Requirements
 To use any of my example repositories you'll only need two things:
 * gnu `make`
-* envsubst
+* `envsubst`
 
 If you're on linux (or using windows linux subsystem -- wsl) simply `apt-get install evnsubst` or using yum via `yum install envsubst`.
 
