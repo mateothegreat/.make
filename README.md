@@ -24,6 +24,17 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""|
 [![Clickity click](https://img.shields.io/badge/k8s%20by%20example%20yo-limit%20time-ff69b4.svg?style=flat-square)](https://k8.matthewdavis.io)
 [![Twitter Follow](https://img.shields.io/twitter/follow/yomateod.svg?label=Follow&style=flat-square)](https://twitter.com/yomateod) [![Skype Contact](https://img.shields.io/badge/skype%20id-appsoa-blue.svg?style=flat-square)](skype:appsoa?chat)
 
+# Requirements
+To use any of my example repositories you'll only need two things:
+* gnu `make`
+* envsubst
+
+If you're on linux (or using windows linux subsystem -- wsl) simply `apt-get install evnsubst` or using yum via `yum install envsubst`.
+
+For OSX users you can install `make` by installing the command line tools via Xcode and to install `make` you'll run `brew install gettext && brew link --force gettext`.
+
+Enjoy!
+
 # Usage
 ```sh
 $ make help
