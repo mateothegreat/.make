@@ -1,4 +1,4 @@
-MANIFESTS 	:= $(shell find manifests -type f 2> /dev/null | tr '\r\n' ' ')
+MANIFESTS 	?= $(shell find manifests -type f 2> /dev/null | tr '\r\n' ' ')
 export
 
 .PHONY: manifests kube logs
